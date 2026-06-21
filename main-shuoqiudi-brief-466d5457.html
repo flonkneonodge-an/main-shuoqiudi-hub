@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>说球帝 · 日常查询与延伸阅读</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f9fc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1b2d3e;
+      line-height: 1.6;
+      padding: 1rem 1.2rem 2.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+
+    /* hero 横幅 — 蓝绿渐变网格背景 */
+    .hero {
+      background: linear-gradient(135deg, #c7e9e1 0%, #a1d3cd 45%, #85c4bc 100%);
+      border-radius: 2.5rem 1rem 2.5rem 1rem;
+      padding: 2.8rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(40, 100, 95, 0.10);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(60, 130, 120, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(60, 130, 120, 0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 2.4rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+      color: #05332c;
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .hero .sub {
+      position: relative;
+      z-index: 1;
+      font-size: 1.15rem;
+      color: #174740;
+      max-width: 80%;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(3px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* 网格卡片区 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.4rem 1.8rem;
+      box-shadow: 0 4px 12px rgba(0, 40, 35, 0.05);
+      border: 1px solid #deece9;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #82bdb5;
+      box-shadow: 0 10px 20px rgba(50, 110, 100, 0.08);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      color: #2a7a6e;
+    }
+
+    .card h3 {
+      font-weight: 550;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+      color: #12453e;
+      letter-spacing: 0.01em;
+    }
+
+    .card p, .card li {
+      font-size: 0.96rem;
+      color: #2a4450;
+      margin-bottom: 0.3rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.2rem;
+    }
+
+    .card li::before {
+      content: "·";
+      color: #3b8f83;
+      font-weight: bold;
+      display: inline-block;
+      width: 1rem;
+    }
+
+    /* 三段自然介绍 — 有叙述感的短文 */
+    .essay-block {
+      background: #ffffffd4;
+      backdrop-filter: blur(2px);
+      padding: 1.8rem 1.8rem 2rem;
+      border-radius: 2rem;
+      box-shadow: 0 4px 14px rgba(55, 100, 95, 0.04);
+      border: 1px solid #d6e9e4;
+    }
+
+    .essay-block h2 {
+      font-size: 1.3rem;
+      font-weight: 530;
+      color: #0c4c42;
+      margin-bottom: 0.9rem;
+      border-left: 5px solid #479b8d;
+      padding-left: 1rem;
+    }
+
+    .essay-block p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #1d3a42;
+    }
+
+    .essay-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .inline-link {
+      color: #1c7b6b;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px solid #9ccfc8;
+      transition: border 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #0a5549;
+      color: #0a5549;
+    }
+
+    /* 页尾提示 */
+    .footer-note {
+      background: #e6f3f0;
+      border-radius: 2.5rem 0.5rem 2.5rem 0.5rem;
+      padding: 1.6rem 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1.2rem;
+      border: 1px solid #b8d9d2;
+      margin-top: 0.6rem;
+    }
+
+    .footer-note .left {
+      font-size: 0.95rem;
+      color: #1c4f46;
+    }
+
+    .footer-note .right {
+      font-size: 0.9rem;
+      color: #3a6f65;
+      background: white;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid #a5cdc4;
+      white-space: nowrap;
+    }
+
+    .footer-note .right a {
+      color: #09554a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-note .right a:hover {
+      text-decoration: underline;
+    }
+
+    /* 微响应 */
+    @media (max-width: 650px) {
+      body {
+        padding: 0.8rem 0.8rem 2rem;
+      }
+      .hero {
+        padding: 2rem 1.2rem 1.8rem;
+        border-radius: 2rem 0.5rem 2rem 0.5rem;
+      }
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .hero .sub {
+        max-width: 100%;
+        font-size: 1rem;
+        padding: 0.3rem 0.9rem;
+      }
+      .grid-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .essay-block {
+        padding: 1.4rem 1rem 1.6rem;
+      }
+      .footer-note {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero 横幅 -->
+  <div class="hero">
+    <h1>说球帝 · 翻阅与对照</h1>
+    <div class="sub">日常查询、延伸阅读 · 安静的信息角落</div>
+  </div>
+
+  <!-- 网格卡片：从日常查询、对照和延伸阅读的角度 -->
+  <div class="grid-cards">
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h3>日常查询</h3>
+      <p>赛程、积分、统计数据，不必反复切换应用。在 <a href="https://main-shuoqiudi.com" class="inline-link">说球帝</a> 里可以快速定位一场比赛的背景，也可以翻看某支球队近五场的走势。</p>
+      <ul>
+        <li>即时比分与过往交锋</li>
+        <li>联赛积分表 & 射手榜</li>
+        <li>球员赛季综合数据</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>对照与比较</h3>
+      <p>把两支队伍同时放在一个页面里横向对比——阵容深度、主客场差异、近十场得失球。适合赛前做一点自己的功课。</p>
+      <ul>
+        <li>交手记录 & 同主客分析</li>
+        <li>战术风格简述</li>
+        <li>近期状态雷达图（预览）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📎</div>
+      <h3>延伸阅读</h3>
+      <p>除了数字和结果，也存有短篇记录、球队变更和赛季回顾。不是长篇大论，更像赛历边上的便签。</p>
+      <ul>
+        <li>赛季关键事件归档</li>
+        <li>转会与阵容变动简述</li>
+        <li>杯赛历史脉络</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 三段自然介绍 — 从日常切入，带叙述感 -->
+  <div class="essay-block">
+    <h2>1. 从一场比赛开始</h2>
+    <p>夜里九点半，你打开联赛页面，想确认一下周末那场德比的首发预测。很多信息散落在各处，但在这里，你很快就能找到上一轮的赛后报告和下周的赛前简报。不用翻太多标签，数据、时间线、阵容变化都排在一起。这也是为什么我越来越多地把 <a href="https://main-shuoqiudi.com" class="inline-link">说球帝</a> 当作一个安静的查询起点——它不吵，也不急着推送什么。</p>
+  </div>
+
+  <div class="essay-block">
+    <h2>2. 对照，是另一种理解</h2>
+    <p>只看一支球队容易陷入惯性。试着把两队近况并排放：A 队主场三连胜，B 队客场两连败，但历史交锋却是 B 队占优。这类对比在常规数据页里就能完成，不需要额外整理。页面结构偏克制，没有什么弹窗干扰，你可以慢慢看。对于喜欢自己下判断的人来说，这种“对照感”挺重要。</p>
+  </div>
+
+  <div class="essay-block">
+    <h2>3. 延伸阅读：不止于比分</h2>
+    <p>有些比赛结束后会留下一些背景记录：比如某位球员的百场里程碑、一支升班马的阵容重组、或者杯赛改制后的签位变化。这些内容被放在边栏和专题里，篇幅不长，但恰好能补充赛程之外的故事。偶尔翻到一条旧记录，会有种“原来当时是这样”的感触。慢慢地，它就变成了一本属于你自己的足球笔记本。</p>
+  </div>
+
+  <!-- 页尾访问提示（自然嵌入链接，无“进入/访问/官网”等词） -->
+  <div class="footer-note">
+    <div class="left">
+      🌿 从日常查询到延伸阅读，保持自己的节奏。
+    </div>
+    <div class="right">
+      <a href="https://main-shuoqiudi.com">说球帝</a> · 信息安静，常翻常新
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
