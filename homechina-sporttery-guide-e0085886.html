@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>竞彩网 · 赛事查询与参考指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f9fc;
+            color: #1e2e3a;
+            line-height: 1.6;
+            padding: 0 16px 40px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(145deg, #d6ecec 0%, #b3d9d9 100%);
+            border-radius: 0 0 48px 48px;
+            padding: 56px 24px 48px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(25, 90, 90, 0.08);
+            margin: 0 -16px 32px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #134e4a;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #255f5a;
+            max-width: 640px;
+            margin: 0 auto 20px;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #ffffffcc;
+            backdrop-filter: blur(2px);
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #14645e;
+            border: 1px solid #c0dedb;
+        }
+
+        /* 通用卡片网格 */
+        .grid-2,
+        .grid-3 {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr;
+        }
+
+        section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #0a3d3a;
+            border-left: 5px solid #2d8f87;
+            padding-left: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 24px 20px;
+            box-shadow: 0 2px 12px rgba(35, 90, 90, 0.06);
+            transition: transform 0.1s ease;
+            border: 1px solid #e4f0ef;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #14645e;
+            margin-bottom: 8px;
+        }
+
+        .card p,
+        .card li {
+            font-size: 0.95rem;
+            color: #2c4651;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 5px 0 5px 20px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 4px;
+            color: #2d8f87;
+            font-weight: bold;
+        }
+
+        .card.highlight {
+            background: #ecf7f6;
+            border-color: #b3d4d1;
+        }
+
+        /* 说明区卡片 */
+        .explain-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px 20px;
+            border-left: 5px solid #72b9b3;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.02);
+        }
+
+        .faq-item strong {
+            color: #0b4f4a;
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #2b4953;
+        }
+
+        /* 底部 */
+        .footer-note {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid #cbdcd9;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #406662;
+        }
+
+        .footer-note a {
+            color: #14645e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #88b6b1;
+        }
+
+        .footer-note a:hover {
+            border-bottom: 2px solid #14645e;
+        }
+
+        .inline-link {
+            color: #14645e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b0d0cb;
+        }
+
+        .inline-link:hover {
+            border-bottom: 2px solid #14645e;
+        }
+
+        .mt-16 {
+            margin-top: 16px;
+        }
+
+        .mt-24 {
+            margin-top: 24px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 840px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 841px) {
+            .grid-3 {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- hero区 -->
+        <header class="hero">
+            <h1>赛事信息 · 对照查询</h1>
+            <p>日常翻阅各联赛数据、赛程与赔率参考，<a href="https://homechina-sporttery.com" class="inline-link">竞彩网</a>提供结构化内容便于延伸阅读。</p>
+            <span class="badge">📋 每日更新  ·  覆盖主流联赛</span>
+        </header>
+
+        <!-- 优势区：网格卡片 2列 -->
+        <section>
+            <h2 class="section-title">常查常用</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>赛程一览</h3>
+                    <p>按联赛、日期归类，可快速对照近期场次。欧冠、五大联赛、亚冠、日韩等均包含。</p>
+                </div>
+                <div class="card">
+                    <h3>赔率与指数</h3>
+                    <p>展示主流公司初始与即时数据，便于自行对比浮动趋势。不预测结果，只陈列数字。</p>
+                </div>
+                <div class="card highlight">
+                    <h3>历史交锋</h3>
+                    <p>收录近10场对战记录，包括主客、半全场、进球分布，适合赛前翻阅。</p>
+                </div>
+                <div class="card">
+                    <h3>球队/球员数据</h3>
+                    <p>积分榜、射手榜、助攻榜、红黄牌统计，减少来回切换页面查找的时间。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 说明区：混合样式 -->
+        <section>
+            <h2 class="section-title">使用场景与说明</h2>
+            <div class="explain-wrap">
+                <div class="card">
+                    <h3>📌 日常查询</h3>
+                    <p>打开 <a href="https://homechina-sporttery.com" class="inline-link">竞彩网</a> 后，可先看“今日赛事”栏目，默认显示受注赛事，包含编号、主客队、开赛时间。点击任意场次即可展开赔率与走势图。</p>
+                </div>
+                <div class="card">
+                    <h3>📎 延伸阅读</h3>
+                    <ul>
+                        <li>联赛专题页面：汇总该联赛所有球队数据与赛程</li>
+                        <li>数据统计表：主客胜率、大球率、先失球逆转次数</li>
+                        <li>赔率变化记录：近3天主流公司调整频率</li>
+                    </ul>
+                </div>
+                <div class="card highlight">
+                    <h3>⚡ 对照技巧</h3>
+                    <p>同时打开两支球队页面，左右对照战绩与交锋。适合深度整理分析时使用。所有页面均可直接分享或收藏。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ摘要 -->
+        <section>
+            <h2 class="section-title">常见问题摘要</h2>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div class="faq-item">
+                    <strong>数据多久更新一次？</strong>
+                    <p>赛程与结果通常在赛事结束后15分钟内更新。赔率受市场影响，实时浮动显示。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>可以只看某联赛的受注场次吗？</strong>
+                    <p>可以。在顶部筛选处选择联赛名字，页面即只显示该联赛当日受注场次。更细致的筛选可通过高级查询。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>手机端浏览完整吗？</strong>
+                    <p>页面针对移动端做了适配，卡片可横向滑动、表格自动缩放。建议使用默认浏览器或微信内置浏览器。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>历史数据能查多久的？</strong>
+                    <p>公开数据一般保留最近两个赛季。深度数据（如伤停、裁判统计）需进入单场页面查看。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部链接 -->
+        <footer class="footer-note">
+            <p>信息来源：<a href="https://homechina-sporttery.com">竞彩网</a> · 仅供个人参考，不构成任何引导。请理性使用。</p>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: #59827c;">页面内容定期整理 · 以最新数据为准</p>
+        </footer>
+    </div>
+</body>
+</html>
