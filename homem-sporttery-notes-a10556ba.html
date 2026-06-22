@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>竞彩资料索引 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f3f4f7;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* 标题区 / 窄 hero */
+    .page-header {
+      margin-bottom: 2.8rem;
+    }
+
+    .page-header h1 {
+      font-weight: 500;
+      font-size: 2.2rem;
+      letter-spacing: -0.01em;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .page-header h1 small {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #64748b;
+      background: #e9edf2;
+      padding: 0.2rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid #d1d9e6;
+    }
+
+    .page-header p {
+      margin-top: 0.6rem;
+      max-width: 680px;
+      color: #475569;
+      font-size: 1rem;
+    }
+
+    /* 卡片网格 —— 目录感布局 */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e6ebf1;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0b1d31;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-title i {
+      font-style: normal;
+      background: #eef2f6;
+      border-radius: 30px;
+      padding: 0 0.5rem;
+      font-size: 0.8rem;
+      color: #475569;
+    }
+
+    .card ul, .card dl {
+      padding-left: 0.2rem;
+      list-style: none;
+    }
+
+    .card li {
+      margin-bottom: 0.65rem;
+      padding-left: 1.2rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .card li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: #3b7cbd;
+      font-weight: 700;
+    }
+
+    .card dt {
+      font-weight: 500;
+      margin-top: 0.3rem;
+      color: #1e293b;
+    }
+
+    .card dd {
+      margin-left: 0.2rem;
+      font-size: 0.92rem;
+      color: #475569;
+      border-left: 2px solid #dce3ec;
+      padding-left: 0.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .tag {
+      background: #eef2f8;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      color: #2c3e5c;
+      border: 1px solid #dbe2ed;
+      display: inline-block;
+    }
+
+    .highlight-badge {
+      background: #f1f5ff;
+      border-left: 4px solid #2a6f97;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 1.6rem 0 1rem;
+      background-color: #f8faff;
+    }
+
+    .highlight-badge p {
+      margin: 0 0 0.3rem;
+    }
+
+    .link-sentence {
+      background: white;
+      padding: 1.3rem 1.8rem;
+      border-radius: 18px;
+      border: 1px solid #dfe6f0;
+      margin: 1.5rem 0 2.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+      font-size: 0.98rem;
+    }
+
+    .link-sentence a {
+      color: #1d4f7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed #8aa9c9;
+    }
+
+    .link-sentence a:hover {
+      border-bottom-style: solid;
+      color: #0a314b;
+    }
+
+    .faq-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eef2f6;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .faq-item span {
+      font-size: 0.9rem;
+      color: #4a5b72;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #8594a8;
+      border-top: 1px solid #dfe5ee;
+      padding-top: 2rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 740px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .faq-mini {
+        grid-template-columns: 1fr;
+      }
+
+      .page-header h1 {
+        font-size: 1.7rem;
+      }
+
+      body {
+        padding: 1.5rem 1rem;
+      }
+
+      .card {
+        padding: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .highlight-badge {
+        padding: 0.8rem;
+      }
+
+      .link-sentence {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 页面标题 · 资料整理视角 -->
+  <div class="page-header">
+    <h1>
+      ⚡ 竞彩知识库
+      <small>索引 · 入口</small>
+    </h1>
+    <p>从信息结构出发，整理竞彩相关的规则、术语、数据源与常用入口。本页作为资料目录，提供经过筛选的参考线索。</p>
+  </div>
+
+  <!-- 两栏目录卡片 -->
+  <div class="grid-2col">
+
+    <!-- 卡片 1 ： 说明区 + 基本条目 -->
+    <div class="card">
+      <div class="card-title">
+        📋 说明区 · 基础框架
+        <i>4项</i>
+      </div>
+      <ul>
+        <li><strong>赛事分类</strong> —— 足球 / 篮球让球胜平负、大小分、比分等主要玩法分类</li>
+        <li><strong>奖金计算逻辑</strong> —— 固定奖金、浮动奖金的触发条件与计算公式</li>
+        <li><strong>过关方式</strong> —— 单关 / 串关 (2串1、3串1 等) 以及容错组合</li>
+        <li><strong>开售与停售时段</strong> —— 每日竞彩销售时间、提前截止场次标识（参考官方通告）</li>
+      </ul>
+      <div style="margin-top: 1rem;">
+        <span class="tag">赔率类型</span>
+        <span class="tag">让球参考</span>
+        <span class="tag">比分玩法</span>
+      </div>
+    </div>
+
+    <!-- 卡片 2 ： 提示区 + 注意事项 -->
+    <div class="card">
+      <div class="card-title">
+        ⚠️ 提示区 · 信息核实
+        <i>4项</i>
+      </div>
+      <dl>
+        <dt>数据延迟提醒</dt>
+        <dd>赔率与让球数值存在分钟级延迟，实际以出票时刻为准。</dd>
+        <dt>赛事变更</dt>
+        <dd>如遇推迟、取消或场地变更，相关注单将按规则处理（通常延期按 1 赔 1 或取消退款）。</dd>
+        <dt>理性参与</dt>
+        <dd>竞彩属于体育竞猜，请根据自身判断投注，量力而行。</dd>
+        <dt>官方渠道</dt>
+        <dd>只有合规体彩实体店或授权平台可出票。认准中国体育彩票标识。</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- 第二行：相关信息区 + 使用场景（两栏） -->
+  <div class="grid-2col">
+    <div class="card">
+      <div class="card-title">
+        🔍 相关信息区
+      </div>
+      <ul>
+        <li><strong>赔率参考</strong> —— 初盘与即时盘对比，观察资金分布趋势</li>
+        <li><strong>球队/球员状态</strong> —— 伤停、交锋记录、近期战绩（非实时数据，建议通过体育数据站查询）</li>
+        <li><strong>冷门统计</strong> —— 历史相同赔率组合下的冷门概率（仅供参考）</li>
+        <li><strong>赛程日历</strong> —— 每日竞彩对阵表（包含编号、联赛、开赛时间）</li>
+      </ul>
+      <div style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">
+        ※ 上述信息可通过体育数据平台或竞彩官方列表交叉验证。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        🧩 常见使用场景
+        <i>摘要</i>
+      </div>
+      <ul>
+        <li>赛前 2 小时查看让球调整，辅助判断资金倾向</li>
+        <li>使用「比分玩法」索引历史相同盘口的比分分布</li>
+        <li>根据联赛特点过滤比赛（如五大联赛 vs 次级联赛）</li>
+        <li>建立个人复盘表：记录分析依据、赔率变化与赛果</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 嵌入式链接 + 知识库入口说明 -->
+  <div class="highlight-badge">
+    <p><strong>📎 信息汇集点</strong>  —  本页作为竞彩资料索引，从规则到数据线索均有涉及。如需直接查看赛事列表、即时赔率及完整玩法说明，可参考 <a href="https://homem-sporttery.com" style="color:#1a4e77; font-weight: 500; text-decoration: underline; text-underline-offset: 3px;">竞彩网</a> 提供的基础框架。</p>
+  </div>
+
+  <!-- 自然句子嵌入 a 标签（完全符合要求：可见文本=竞彩网） -->
+  <div class="link-sentence">
+    针对竞彩入门用户，建议先通读玩法分类与奖金规则。日常分析时，可将 
+    <a href="https://homem-sporttery.com">竞彩网</a> 
+    作为对阵列表与赔率参考的起点，再结合其他数据维度综合判断。
+  </div>
+
+  <!-- FAQ 摘要区（紧凑卡片） -->
+  <div class="card" style="margin-bottom: 2rem;">
+    <div class="card-title">
+      ❓ 常见问题摘要
+      <i>4 则</i>
+    </div>
+    <div class="faq-mini">
+      <div class="faq-item">
+        <strong>让球胜平负中的“-1”代表什么？</strong>
+        <span>主队让 1 球，即主队净胜 2 球或以上才算“胜”。</span>
+      </div>
+      <div class="faq-item">
+        <strong>串关容错如何计算奖金？</strong>
+        <span>以 M 串 N 为例：中奖注数 = 组合注数，注数对应赔率相乘再乘本金。</span>
+      </div>
+      <div class="faq-item">
+        <strong>为什么有些比赛不开售单关？</strong>
+        <span>根据竞彩规则，部分场次仅支持串关，通常标注在列表“单关”列。</span>
+      </div>
+      <div class="faq-item">
+        <strong>赔率变动是否影响已出票的注单？</strong>
+        <span>不影响，出票后赔率即锁定，后续变化仅针对未出票。</span>
+      </div>
+    </div>
+    <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #5b6d84;">
+      ↑ 以上为摘要，完整规则请以官方解释为准。
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    ⚽ 竞彩知识索引 · 信息整理 2025  ·  本页仅作参考，不构成投注建议。
+  </div>
+
+</div>
+</body>
+</html>
